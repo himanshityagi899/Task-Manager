@@ -1,0 +1,39 @@
+
+.header-wrapper{
+    font-weight: 600;
+    color: #A5D7E8;
+    height: 12vh;
+    background:#0B2447;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+ul{
+    display: flex;
+    margin-right: 50px;
+}
+li{
+    list-style: none;
+    margin-right: 30px;
+
+}
+a{
+    text-decoration: none;
+    color: #A5D7E8;
+   
+    padding: 8px;
+    border-radius: 5px;
+}
+a:hover{
+    background-color: #A5D7E8;
+    color: #0B2447;
+    transition: 400ms;
+}
+
+.logo{
+    height: 50px;
+    
+    pointer-events: none;
+    cursor: none;
+    margin-left: 30px;
+}
