@@ -4,7 +4,7 @@ import './Header.css';
 const Header = () => {
   return (
     <div className='header-wrapper'>
-        <img className="logo" src={`${process.env.PUBLIC_URL}/logo.png`} />
+        <img className="logo" src={`${process.env.PUBLIC_URL}/assets/images/logo.png`} />
         
         <ul>
             <li><a href="">Pricing</a></li>
