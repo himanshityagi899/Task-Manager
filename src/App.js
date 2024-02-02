@@ -39,7 +39,7 @@ const WrapperComp =()=>{
   const {isLogedIn}=useContext(UserContext);
   return(
     <div className="App">
-      {isLogedIn ? <Dashboard/>:<LandingPage/>}
+      {1 ? <Dashboard/>:<LandingPage/>}
     </div>
   )
 }
