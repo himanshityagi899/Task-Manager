@@ -5,10 +5,18 @@ export const UserContext = createContext({user:null,isLogedIn:false,err:null});
 
 
 export const UserContextProvider = ({children})=>{
+
     const [user,setUser] = useState(null);
 	const [isLogedIn,setIsLogedIn] = useState(false);
 	const [err,setErr] = useState(null);
 
+
+	const setLoggedIn=(loggedIn)=>{
+		console.log("called");
+		setIsLogedIn(prev => loggedIn);
+		
+	}
+	
 	useEffect(()=>{
 		const controller = new AbortController();
 		const signal = controller.signal;
@@ -46,6 +54,7 @@ export const UserContextProvider = ({children})=>{
 		setUser,
 		isLogedIn,
 		setIsLogedIn,
+		setLoggedIn,
 		err,
 		setErr
 	}

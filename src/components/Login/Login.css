@@ -1,0 +1,29 @@
+.login-form{
+    margin-top: 50px;
+    padding: 20px;
+    width: 400px;
+    position: relative;
+    box-shadow: #A5D7E8 1px 1px 1px 1px;
+    /* border: 1px solid rgba(0, 0, 0, 0.408); */
+    border-radius: 10px;
+}
+
+.login-form > h2 {
+    margin-bottom: 20px;
+}
+
+.form > span {
+    margin-top: 20px;
+}
+
+.cross-btn{
+    position: absolute;
+    right: 15px;
+    background-color: #0B2447;
+    border: none;
+    color: #A5D7E8;
+    padding: 5px 8px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
