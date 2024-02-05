@@ -1,11 +1,12 @@
 
 .submit-btn{
     margin-top: 20px;
+    font-weight: 800;
     border: none;
     width: 85%;
     padding: 10px;
-    background-color: #0B2447;
-    color: #A5D7E8;
+    background:#0B2447;
+    color: white;
     cursor: pointer;
 }
 
