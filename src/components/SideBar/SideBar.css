@@ -1,10 +1,10 @@
-.drawer-wrapper{
-    background-color: red;
-    
+.avatar{
+    display: flex;
+    margin-left: 30px;
+    /* background-color: pink; */
+    align-items: center;
 }
-
-#aside {
-    background:#0B2447;
+.avatar > span{
+    margin-left: 15px;
 }
-
 
