@@ -6,6 +6,7 @@ import MainDashBoard from '../MainDashBoard/MainDashBoard';
 import AddBoardForm from './AddBoardForm/AddBoardForm';
 import './Dashboard.css';
 import AddPeopleForm from './AddPeopleForm/AddPeopleForm';
+import NoBoardFound from '../NoBoardFound/NoBoardFound';
 
 const Dashboard = () => {
     const {user} = useContext(UserContext);
@@ -90,6 +91,12 @@ const Dashboard = () => {
         getAllUsers();
     },[newBoardAdded]);
 
+    const noBoardFound=(
+        <Grid xs={9.76}>   
+            <NoBoardFound/>
+        </Grid>
+    )
+
     return (
         
         <Grid style={{ height: '100vh' ,width:'100vw'}} container spacing={0}>
@@ -98,6 +105,10 @@ const Dashboard = () => {
             <Grid xs={2.24}>
                 <SideBar allBoards={myAllBoards} setCurrBoardFromChild={setCurrBoardFromChild}/>
             </Grid>
+            {currBoard==null ? 
+            
+            noBoardFound
+                :
             <Grid xs={9.76}>   
                 {user.role==="MANAGER" && 
                     <div onClick={() => setAddBoardMode(prev => !prev)} className={`absolute top-5 right-10 addBoard ${addPeopleMode || addBoardMode ? 'blurred':''}`}>
@@ -123,7 +134,7 @@ const Dashboard = () => {
                     </div>
                 }
                 <MainDashBoard blur={addBoardMode || addPeopleMode} currBoard={currBoard}/>
-            </Grid>
+            </Grid>}
         </Grid>
     )
 }
