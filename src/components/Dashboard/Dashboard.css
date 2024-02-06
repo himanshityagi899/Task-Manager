@@ -1,0 +1,15 @@
+.addBoard{
+    width: max-content;
+    padding: 10px;
+    border-radius: 50px;
+    color: white;
+    transform: scale(0.9);
+    background-color: rgb(18,24,38);
+    cursor: pointer;
+}
+.middleFormWrapper{
+    position: absolute;
+    top: 50%;
+    right: 42%;
+    transform: translate(50%,-50%);
+}
