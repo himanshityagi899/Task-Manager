@@ -23,7 +23,7 @@ const Login = ({handleCross}) => {
         setIsPending(true); 
         
         try{
-            const url='http://localhost:8081/api/v1/user/login';
+            const url=process.env.REACT_APP_BASE_URL+'/user/login';
            
             fetch(url, {
 				method: 'POST',

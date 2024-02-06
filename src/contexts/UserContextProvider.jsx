@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import {createContext,useState,useEffect} from 'react';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 export const UserContext = createContext({user:null,isLogedIn:false,err:null});
 
@@ -22,26 +24,34 @@ export const UserContextProvider = ({children})=>{
 		const signal = controller.signal;
 
 		const getUser= ()=>{
-			const url=`url-to-be-used`;
+
+			const token=localStorage.getItem('jwtToken');
+	
+			if(token==null) return;
 			
-			fetch(url, {
+			fetch('http://localhost:8081/api/v1/user/getMe', {
 				method: 'GET',
-				credentials:'include',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${token}`, // Include the JWT token in the Authorization header
+				},
 				signal
 			})
 			.then(res => res.json())
 			.then(res =>{
-				// set user and isLoggedIn here
+				console.log(res);
+				setUser(prev => res.data);
+				setIsLogedIn(prev => true);
+				
 			})
 			.catch(error=>{
 				console.log("error",error);
-				// handle error here
 			});
 			
 		}
 		
         // will call getUser when it is implemented
-		// getUser();
+		getUser();
 
 		return ()=>{
 			controller.abort();
