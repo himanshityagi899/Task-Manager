@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 
 
 
-const AddBoardForm = ({setNewBoardAdded}) => {
+const AddBoardForm = ({setNewBoardAdded,setAddBoardMode}) => {
 	const [board,setBoard] = useState({
 		title:"",
 		description:""
@@ -60,7 +60,7 @@ const AddBoardForm = ({setNewBoardAdded}) => {
 	}
 
 	return (
-		<form className='form login-form'>
+		<form  id='form' className='form login-form'>
 			<h2>Add Board</h2>
 			<TextField 
 
@@ -86,10 +86,8 @@ const AddBoardForm = ({setNewBoardAdded}) => {
 			/>
 
 			<button className='submit-btn' onClick={handleSubmit}>Add</button>
-
+			<span  onClick={() => setAddBoardMode(prev => !prev)} style={{backgroundColor: "#103569",color:"white"}} className='cursor-pointer px-1  rounded-sm b absolute top-0 right-10'>X</span>
 		</form>
-			
-		
   )
 }
 
