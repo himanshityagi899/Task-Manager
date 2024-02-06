@@ -67,9 +67,10 @@ return (
                     </div>
 
                     <div className="space-y-3 ">
-                        <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">Boards</label>
-
-                        {allBoardsLinks}
+                        <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400 ">Boards</label>
+                        <div className='max-h-[200px] overflow-y-auto scrollbar'>
+                            {allBoardsLinks}    
+                        </div>
 
                     </div>
 
