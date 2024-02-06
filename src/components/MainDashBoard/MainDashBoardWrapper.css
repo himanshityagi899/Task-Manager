@@ -44,20 +44,5 @@
 }
 
 .laneTag{
-    width: max-content;
-    padding: 10px;
-    border-radius: 50px;
-    color: white;
-    transform: scale(0.9);
-}
-.inProgress{
-    background-color: rgb(94, 94, 237);
-}
-
-.blocker{
-    background-color: red;
-}
-
-.completed{
-    background-color: rgb(19, 173, 19);
+    font-weight: 600;
 }

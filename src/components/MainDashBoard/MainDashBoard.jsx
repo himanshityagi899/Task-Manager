@@ -8,6 +8,7 @@ const MainDashBoard = ({currBoard}) => {
    
     <div className='MainDashBoardWrapper'>
         
+
         <div className='titleWrapper'>
             <h1>{currBoard?.title}</h1>
             <h4>{currBoard?.description }</h4>

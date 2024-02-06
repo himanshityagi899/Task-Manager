@@ -30,7 +30,7 @@ export const UserContextProvider = ({children})=>{
 			if(token==null) return;
 			
 			fetch('http://localhost:8081/api/v1/user/getMe', {
-				method: 'GET',
+				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 					'Authorization': `Bearer ${token}`, // Include the JWT token in the Authorization header
@@ -39,9 +39,11 @@ export const UserContextProvider = ({children})=>{
 			})
 			.then(res => res.json())
 			.then(res =>{
-				console.log(res);
-				setUser(prev => res.data);
-				setIsLogedIn(prev => true);
+
+				if(res.statusCode && (""+res.statusCode).startsWith("2")){
+					setUser(prev => res.data);
+					setIsLogedIn(prev => true);
+				}
 				
 			})
 			.catch(error=>{
