@@ -10,7 +10,6 @@ import Dashboard from './components/Dashboard/Dashboard';
 function App() {
 
   const {isLogedIn}=useContext(UserContext);
-  console.log('rendered')
 
   return (
     <>

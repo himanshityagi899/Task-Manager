@@ -4,7 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import { green } from '@mui/material/colors';
 import { UserContext } from '../../contexts/UserContextProvider';
 
-function SideBar({allBoards,setCurrBoardFromChild}) {
+function SideBar({allBoards,setCurrBoardFromChild,cnts}) {
     const {user} = React.useContext(UserContext);
     const handleChangeBoard=(boardId)=>{
         setCurrBoardFromChild(boardId);
@@ -26,7 +26,7 @@ function SideBar({allBoards,setCurrBoardFromChild}) {
 
 return (
     
-        <aside id='aside' className="flex flex-col w-64 h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
+        <aside id='aside' className="flex flex-col h-screen px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l dark:bg-gray-900 dark:border-gray-700">
             <a className="pointer-events-none" href="#">
                 <img className="w-auto h-7 mx-auto" src={`${process.env.PUBLIC_URL}/assets/images/logo.png`} alt="logo" />
             </a>
@@ -42,7 +42,7 @@ return (
                                     <span className="mx-2 text-sm font-medium">In Progress</span>
                                 </td>
                                 <td className="px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200">
-                                    <span className="text-xs inline-flex items-center justify-center h-4 w-4 bg-green-500 rounded-full text-white">5</span>
+                                    <span className="text-xs inline-flex items-center justify-center h-4 w-4 bg-green-500 rounded-full text-white">{cnts.inprogress}</span>
                                 </td>
                                 </tr>
                                 <tr>
@@ -50,7 +50,7 @@ return (
                                     <span className="mx-2 text-sm font-medium">Blocker</span>
                                 </td>
                                 <td className="px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200">
-                                    <span className="text-xs inline-flex items-center justify-center h-4 w-4 bg-green-500 rounded-full text-white">5</span>
+                                    <span className="text-xs inline-flex items-center justify-center h-4 w-4 bg-green-500 rounded-full text-white">{cnts.blocker}</span>
                                 </td>
                                 </tr>
                                 <tr>
@@ -58,7 +58,7 @@ return (
                                     <span className="mx-2 text-sm font-medium">Completed</span>
                                 </td>
                                 <td className="px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200">
-                                    <span className="text-xs inline-flex items-center justify-center h-4 w-4 bg-green-500 rounded-full text-white">5</span>
+                                    <span className="text-xs inline-flex items-center justify-center h-4 w-4 bg-green-500 rounded-full text-white">{cnts.completed}</span>
                                 </td>
                                 </tr>
                             </tbody>
@@ -81,7 +81,7 @@ return (
                     <Avatar sx={{ width: 30, height: 30,bgcolor: green[400] }}>{user.name[0]}</Avatar>
                     <span style={{color:'white'}}>{(user.name.split(" "))[0]}</span>
                 </div>
-                <div className='avatar mt-5 ml-10 text-white' >
+                <div className='avatar mt-1 ml-auto text-white' >
                     <span onClick={logout} className='cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 rounded-lg hover:text-gray-700 p-2'>
                         Logout
                     </span>

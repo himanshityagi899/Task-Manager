@@ -26,7 +26,6 @@ const AddPeopleForm= ({allUsers,setAddPeopleMode,boardId}) => {
             
             const idList=selectedUser.map(user => user.value);
 
-            console.log(idList)
             fetch(url, {
 				method: 'POST',
 				headers: {
