@@ -2,11 +2,11 @@ import React from 'react'
 import './MainDashBoardWrapper.css'
 
 
-const MainDashBoard = ({currBoard}) => {
+const MainDashBoard = ({currBoard,addBoardMode}) => {
     
   return (
    
-    <div className='MainDashBoardWrapper'>
+    <div className={`${addBoardMode ? "blurred":""} MainDashBoardWrapper`}>
         
 
         <div className='titleWrapper'>

@@ -6,10 +6,20 @@
     transform: scale(0.9);
     background-color: rgb(18,24,38);
     cursor: pointer;
+
 }
 .middleFormWrapper{
     position: absolute;
     top: 50%;
-    right: 42%;
+    right: 45%;
     transform: translate(50%,-50%);
+    z-index: 99 !important;
 }
+
+.blurred{
+    filter: blur(5px) !important;
+}
+#form{
+    z-index: 99;
+}
+

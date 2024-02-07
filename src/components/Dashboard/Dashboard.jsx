@@ -61,25 +61,25 @@ const Dashboard = () => {
     return (
         
         <Grid style={{ height: '100vh' ,width:'100vw'}} container spacing={0}>
-            {user.role==="MANAGER" && 
-                <div onClick={() => setAddBoardMode(prev => !prev)} className={`absolute top-10 right-10 addBoard`}>
-                    Add Board
-                </div>
-            }
-
-            {
-                addBoardMode && 
-                <div className='middleFormWrapper'>
-                    <AddBoardForm setNewBoardAdded={setNewBoardAdded}/>
-                </div>
-            }
+            
 
             <Grid xs={2.24}>
                 <SideBar allBoards={myAllBoards} setCurrBoardFromChild={setCurrBoardFromChild}/>
             </Grid>
             <Grid xs={9.76}>   
-                
-                <MainDashBoard currBoard={currBoard}/>
+                {user.role==="MANAGER" && 
+                    <div onClick={() => setAddBoardMode(prev => !prev)} className={`absolute top-10 right-10 addBoard ${addBoardMode ? 'blurred':''}`}>
+                        Add Board
+                    </div>
+                }
+
+                {
+                    addBoardMode && 
+                    <div className='middleFormWrapper'>
+                        <AddBoardForm setAddBoardMode={setAddBoardMode} setNewBoardAdded={setNewBoardAdded}/>
+                    </div>
+                }
+                <MainDashBoard addBoardMode={addBoardMode} currBoard={currBoard}/>
             </Grid>
         </Grid>
     )
