@@ -10,7 +10,6 @@ import AddPeopleForm from './AddPeopleForm/AddPeopleForm';
 import NoBoardFound from '../NoBoardFound/NoBoardFound';
 
 const Dashboard = () => {
-    const {user} = useContext(UserContext);
 
     /* states used to store data */
         // board
@@ -25,8 +24,7 @@ const Dashboard = () => {
     
     /* states used to reflect events */
     const [newBoardAdded,setNewBoardAdded] = useState(false);
-    const [addBoardMode,setAddBoardMode]= useState(false);
-    const [addPeopleMode,setAddPeopleMode] = useState(false);
+    
 
     const setCurrBoardFromChild=(boardId)=>{
         const board=myAllBoards.filter(board => board.boardId==boardId);
@@ -41,7 +39,7 @@ const Dashboard = () => {
         return allTask.reduce((counts, task) => {
           counts[task.status.toLowerCase()]++;
           return counts;
-        }, { inprogress: 0, blocker: 0, completed: 0 });
+        }, { inprogress: 0, blocker: 0, complete: 0 });
     }
 
     const getAllTasks = (boardId)=>{
@@ -154,35 +152,12 @@ const Dashboard = () => {
             noBoardFound
                 :
             <Grid xs={9.76} sx={{overflow:'scroll'}}>   
-                {/* if manager show Add Board button */}
-                {user.role==="MANAGER" && 
-                    <div onClick={() => setAddBoardMode(prev => !prev)} className={`absolute top-5 right-10 addBoard ${addPeopleMode || addBoardMode ? 'blurred':''}`}>
-                        Add Board
-                    </div>
-                }
-                {/* if manager show Add People to Board button */}
-                {user.role==="MANAGER" && 
-                    <div onClick={() => setAddPeopleMode(prev => !prev)} className={`absolute top-5 right-40 addBoard ${(addPeopleMode || addBoardMode) ? 'blurred':''}`}>
-                        Add People
-                    </div>
-                }
-
-                {/* toggle addBoardMode */}
-                {
-                    addBoardMode && 
-                    <div className='middleFormWrapper'>
-                        <AddBoardForm setAddBoardMode={setAddBoardMode} setNewBoardAdded={setNewBoardAdded}/>
-                    </div>
-                }
-
-                {/* toggle addPeopleMode */}
-                {
-                    addPeopleMode &&
-                    <div className='middleFormWrapper'>
-                        <AddPeopleForm allUsers={allUsers} setAddPeopleMode={setAddPeopleMode} boardId={currBoard.boardId}/>
-                    </div>
-                }
-                <MainDashBoard blur={addBoardMode || addPeopleMode} allTask={allTask} allUsers={allUsers} currBoard={currBoard}/>
+                <MainDashBoard 
+                    allTask={allTask} 
+                    allUsers={allUsers} 
+                    currBoard={currBoard}
+                    setNewBoardAdded={setNewBoardAdded}
+                />
             </Grid>}
         </Grid>
     )

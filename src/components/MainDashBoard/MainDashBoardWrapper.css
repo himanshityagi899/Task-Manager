@@ -8,13 +8,6 @@
 .titleWrapper{
     /* background-color: pink; */
     display: flex;
-    flex-direction: column;
     align-items: start;
     margin-left: 40px;
-}
-.titleWrapper > h1{
-    font-size: xx-large;
-}
-.titleWrapper > h4{
-    font-size: large;
 }

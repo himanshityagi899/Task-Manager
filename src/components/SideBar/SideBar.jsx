@@ -58,7 +58,7 @@ return (
                                     <span className="mx-2 text-sm font-medium">Completed</span>
                                 </td>
                                 <td className="px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200">
-                                    <span className="text-xs inline-flex items-center justify-center h-4 w-4 bg-green-500 rounded-full text-white">{cnts.completed}</span>
+                                    <span className="text-xs inline-flex items-center justify-center h-4 w-4 bg-green-500 rounded-full text-white">{cnts.complete}</span>
                                 </td>
                                 </tr>
                             </tbody>
@@ -81,8 +81,8 @@ return (
                     <Avatar sx={{ width: 30, height: 30,bgcolor: green[400] }}>{user.name[0]}</Avatar>
                     <span style={{color:'white'}}>{(user.name.split(" "))[0]}</span>
                 </div>
-                <div className='avatar mt-1 ml-auto text-white' >
-                    <span onClick={logout} className='cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 rounded-lg hover:text-gray-700 p-2'>
+                <div className='avatar mt-2 pl-[20px] text-white' >
+                    <span onClick={logout} className='cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 rounded-md hover:text-gray-700 p-1'>
                         Logout
                     </span>
                 </div>

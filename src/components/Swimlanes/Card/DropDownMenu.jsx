@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
-const DropDownMenu = ({task,setCurrTask}) => {
+const DropDownMenu = ({task,status,setCurrTask}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -47,9 +47,12 @@ const DropDownMenu = ({task,setCurrTask}) => {
                 }
             });
         }
+        else if(res.statusCode && (""+res.statusCode).startsWith("4")){
+          
+        }
     }
     catch(error){
-        console.log('error 💥:',error);
+      toast.error(error.response.data.message);
     }
 
 }
@@ -82,11 +85,11 @@ const DropDownMenu = ({task,setCurrTask}) => {
       </div>
 
       {isOpen && (
-        <div className="w-20 absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
-          <div className="py-1" role="none">
-            <a  onClick={()=> handleChangeStatus("INPROGRESS")} className="cursor-pointer text-gray-700 block px-4 py-2 text-xs hover:bg-gray-50" role="menuitem" tabIndex="-1" id="menu-item-0">In Progress</a>
-            <a  onClick={()=> handleChangeStatus("BLOCKER")} className="cursor-pointer text-gray-700 block px-4 py-2 text-xs hover:bg-gray-50" role="menuitem" tabIndex="-1" id="menu-item-1">Blocker</a>
-            <a  onClick={()=> handleChangeStatus("COMPLETE")} className="cursor-pointer text-gray-700 block px-4 py-2 text-xs hover:bg-gray-50" role="menuitem" tabIndex="-1" id="menu-item-2">Completed</a>
+        <div className="w-[100px] absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
+          <div className="" role="none">
+            {status != "INPROGRESS" && <a  onClick={()=> handleChangeStatus("INPROGRESS")} className="cursor-pointer text-gray-700 block px-4 py-2 text-xs hover:bg-gray-50" role="menuitem" tabIndex="-1" id="menu-item-0">In Progress</a>}
+            {status != "BLOCKER" && <a  onClick={()=> handleChangeStatus("BLOCKER")} className="cursor-pointer text-gray-700 block px-4 py-2 text-xs hover:bg-gray-50" role="menuitem" tabIndex="-1" id="menu-item-1">Blocker</a>}
+            {status != "COMPLETE" && <a  onClick={()=> handleChangeStatus("COMPLETE")} className="cursor-pointer text-gray-700 block px-4 py-2 text-xs hover:bg-gray-50" role="menuitem" tabIndex="-1" id="menu-item-2">Completed</a>}
           </div>
         </div>
       )}
