@@ -4,7 +4,6 @@ import toast from 'react-hot-toast';
 import { FaSpinner } from 'react-icons/fa';
 
 import { UserContext } from '../../../contexts/UserContextProvider';
-import Loading from '../../Loading/Loading';
 
 const DropDownMenu = ({task,status,setCurrTask}) => {
   const {user}=useContext(UserContext);

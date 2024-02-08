@@ -4,7 +4,7 @@ import { UserContext } from '../../contexts/UserContextProvider';
 
 const Swimlanes = ({allTask,allUsers}) => {
     const {user} = useContext(UserContext);
-
+    
     const groupTasksByUserId=()=> {
         const userMap=allUsers.reduce((map, user) => {
             map[user.userId] = user.name+"("+user.email+")";
@@ -32,10 +32,9 @@ const Swimlanes = ({allTask,allUsers}) => {
     }
     
     let keyValArray=[];
-    console.log(user,allTask)
+ 
     const preProcess=()=>{
         const groupedTask=groupTasksByUserId();
-        console.log('grouped task',groupedTask);
         for(const key in groupedTask){
             const val=groupedTask[key];
             keyValArray.push([key,val]);

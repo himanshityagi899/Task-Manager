@@ -8,7 +8,7 @@ import Select from 'react-select';
 const AddPeopleForm= ({allUsers,setAddPeopleMode,boardId}) => {
 
     const [selectedUser,setSelectedUsers] = useState([]);
-    
+    const [isPending,setIsPending] = useState(false);
     const handleSelect=(users)=>{
         setSelectedUsers(prev => users);
     }
@@ -19,6 +19,7 @@ const AddPeopleForm= ({allUsers,setAddPeopleMode,boardId}) => {
 		const signal = controller.signal;
         
         try{
+            setIsPending(true);
             const token=localStorage.getItem('jwtToken');
             const url=process.env.REACT_APP_BASE_URL+'/board/assignBoard/'+boardId;
 
@@ -46,11 +47,12 @@ const AddPeopleForm= ({allUsers,setAddPeopleMode,boardId}) => {
                     console.log(res);
 					toast.error(res.message || "Something went wrong while adding user to board!")
                 }
-                
+                setIsPending(false);
             });
         }
         catch(error){
             toast.error(error.message || "something went wrong!");
+            setIsPending(false);
         };
 
     }
@@ -89,8 +91,8 @@ const AddPeopleForm= ({allUsers,setAddPeopleMode,boardId}) => {
             styles={customStyles}
         />
 
-			<button className='submit-btn' onClick={handleSubmit}>Add</button>
-			<span  onClick={() => setAddPeopleMode(prev => !prev)} style={{backgroundColor: "#103569",color:"white"}} className='cursor-pointer px-1  rounded-sm b absolute top-0 right-10'>X</span>
+			<button className='submit-btn' onClick={handleSubmit}>{isPending ? 'Loading..':'Add'}</button>
+			<span  onClick={() => setAddPeopleMode(prev => !prev)} style={{backgroundColor: "rgb(18,24,38)",color:"white"}} className='cursor-pointer px-1  rounded-sm b absolute top-0 right-10'>X</span>
 		</form>
         
     );
