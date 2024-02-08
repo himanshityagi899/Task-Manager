@@ -2,48 +2,12 @@
     /* background-color: red; */
     height: 100vh;
     overflow: scroll;
+    width: 80vw;
+    padding-top: 10px;
 }
 .titleWrapper{
     /* background-color: pink; */
     display: flex;
-    flex-direction: column;
     align-items: start;
     margin-left: 40px;
-}
-.titleWrapper > h1{
-    font-size: xx-large;
-}
-.titleWrapper > h4{
-    font-size: large;
-}
-.laneSection{
-    display: flex;
-    justify-content: space-evenly;
-    height: 80vh;
-    /* background-color: blue; */
-    padding-top: 30px;
-    margin-top: 30px;
-
-}
-.laneWrapper{
-    display: flex;
-    flex-direction: column;
-    
-    align-items: center;
-}
-
-.lane{
-    background-color: white;
-    box-shadow: 
-    2px 2px 2px rgba(0, 0, 0, 0.1), /* Top-left shadow */
-    2px 2px 2px rgba(0, 0, 0, 0.1), /* Bottom-right shadow */
-    3px 3px 5px rgba(0, 0, 0, 0.1); /* Additional depth shadow */
-    border-radius: 20px;
-    height: 90%;
-    width: 300px;
-    margin-top: 20px;
-}
-
-.laneTag{
-    font-weight: 600;
 }

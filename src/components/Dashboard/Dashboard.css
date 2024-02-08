@@ -20,6 +20,6 @@
     filter: blur(5px) !important;
 }
 #form{
-    z-index: 99;
+    box-shadow: none;
 }
 
