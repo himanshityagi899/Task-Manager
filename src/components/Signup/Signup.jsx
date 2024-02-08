@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import './Signup.css';
 import { toast } from 'react-hot-toast';
+import Loading from '../Loading/Loading';
 
 const Signup = ({handleCross}) => {
 	const [user,setUser] = useState({
@@ -22,38 +23,38 @@ const Signup = ({handleCross}) => {
 
 
 	const handleSubmit =(event)=>{
-		
-        event.preventDefault();
+		event.preventDefault();
         setIsPending(true); 
-        
-        try{
-            const url='http://localhost:8081/api/v1/user/signup';
-           
-            fetch(url, {
+		
+		try{
+			const url='http://localhost:8081/api/v1/user/signup';
+			
+			fetch(url, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json' // Specify JSON format
 				},
-                body: JSON.stringify(user)
+				body: JSON.stringify(user)
 			})
-            .then(res => res.json())
-            .then(res=>{
+			.then(res => res.json())
+			.then(res=>{
 				
-                if(!res.statusCode || !(res.statusCode!=="201")){
-                    toast.error(res.message || "something went wrong!");
-                }
-                else{
-                    toast.success("Signed in! Please login");
+				if(!res.statusCode || !(res.statusCode!=="201")){
+					toast.error(res.message || "something went wrong!");
+				}
+				else{
+					toast.success("Signed in! Please login");
+					setIsPending(false);
 					goToLogin();
-                }
-                setIsPending(false); 
-            });
-        }
-        catch(error){
-            toast.error(error.message || "something went wrong!");
-            setIsPending(false); 
-        };
-
+				}
+				setIsPending(false); 
+			});
+		}
+		catch(error){
+			toast.error(error.message || "something went wrong!");
+			setIsPending(false);
+		};
+        
     };
 
 	const validateEmail = (email)=>{
@@ -71,7 +72,6 @@ const Signup = ({handleCross}) => {
         handleCross("Login")
     }
 	const handleChange =(e)=>{
-		
 		const currUser={
 			...user,
 			[e.target.name]:e.target.value
@@ -152,8 +152,10 @@ const Signup = ({handleCross}) => {
 					</Select>
      		 </FormControl>
 
-            <button className='submit-btn' onClick={handleSubmit}>Signup</button>
-
+            <button className='submit-btn' onClick={handleSubmit}>
+				{isPending ? "Loading...":"Sigup"}
+			</button>
+			
 			<span>Already have a account?</span>
 			<a id="redirect" onClick={goToLogin}>Login</a>
 			

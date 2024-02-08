@@ -12,7 +12,6 @@ const Login = ({handleCross}) => {
 		password:""
 	});
 	const [isEmailValid,setIsEmailValid] = useState(true);
-	const [isPasswordValid,setisPasswordValid] = useState(true);
 	const [isPending,setIsPending] = useState(false);
 
 	const {setUser,setIsLogedIn} = useContext(UserContext);
@@ -20,7 +19,7 @@ const Login = ({handleCross}) => {
 	const handleSubmit =(event)=>{
 		
         event.preventDefault();
-        setIsPending(true); 
+        setIsPending(prev => true); 
         
         try{
             const url=process.env.REACT_APP_BASE_URL+'/user/login';
@@ -48,27 +47,24 @@ const Login = ({handleCross}) => {
 
 					setUser(res.data.user);
                     toast.success("Logged in!");
+					
                 }
-                setIsPending(false); 
+				setIsPending(false); 
+                
             });
         }
         catch(error){
             toast.error(error.message || "something went wrong!");
             setIsPending(false); 
         };
-
+		
     };
 
 	const validateEmail = (email)=>{
 		const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     	return email==="" || emailPattern.test(email);
 	}
-	const validatePassword = (password) => {
-		const capitalRegex = /[A-Z]/; 
-		const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/; 
-		const minLen = password.length >= 8; 
-		return password.length=="" || capitalRegex.test(password) && specialCharRegex.test(password) && minLen;
-	  };
+	
 	const goToSignup=()=>{
 		handleCross("Signup")
 	}
@@ -81,7 +77,6 @@ const Login = ({handleCross}) => {
 			return currUser;
 		});
 		setIsEmailValid(prev => validateEmail(currUser.email));
-		setisPasswordValid(prev => validatePassword(currUser.password));
 	}
 
 	return (
@@ -113,7 +108,9 @@ const Login = ({handleCross}) => {
 			/>
 
 
-			<button className='submit-btn' onClick={handleSubmit}>Login</button>
+			<button className='submit-btn' onClick={handleSubmit}>
+				{isPending ? "Loading...":"Login"}
+			</button>
 
 			<span>Don't have a account?</span>
 			<a id="redirect" onClick={goToSignup}>Signup</a>

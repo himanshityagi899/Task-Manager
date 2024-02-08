@@ -8,6 +8,7 @@ import AddBoardForm from './AddBoardForm/AddBoardForm';
 import './Dashboard.css';
 import AddPeopleForm from './AddPeopleForm/AddPeopleForm';
 import NoBoardFound from '../NoBoardFound/NoBoardFound';
+import Loading from '../Loading/Loading';
 
 const Dashboard = () => {
 
@@ -23,8 +24,9 @@ const Dashboard = () => {
     const [allTask,setAllTask] = useState([]);
     
     /* states used to reflect events */
-    const [newBoardAdded,setNewBoardAdded] = useState(false);
+    const [newBoardAdded,setNewBoardAdded] = useState(true);
     
+    const [isPending,setIsPending] = useState(false);
 
     const setCurrBoardFromChild=(boardId)=>{
         const board=myAllBoards.filter(board => board.boardId==boardId);
@@ -32,9 +34,6 @@ const Dashboard = () => {
         getAllTasks(boardId);
     }
 
-    {
-
-    }
     const getTaskCnt=()=> {
         return allTask.reduce((counts, task) => {
           counts[task.status.toLowerCase()]++;
@@ -47,7 +46,6 @@ const Dashboard = () => {
         const controller = new AbortController();
 		const signal = controller.signal;
         const token=localStorage.getItem('jwtToken');
-        if(token==null || boardId==null) return;
 
         const url=process.env.REACT_APP_BASE_URL+'/task/'+boardId;
         try{
@@ -65,100 +63,112 @@ const Dashboard = () => {
                 if(res.statusCode && (""+res.statusCode).startsWith("2")){
                     setAllTask(prev => res.data);
                 }
+                setIsPending(false);
             });
         }catch(error){
             console.log('error 💥:',error);
+            setIsPending(false);
         }
     }
-
-    useEffect(()=>{
-        
+    useEffect(() => {
         const controller = new AbortController();
-		const signal = controller.signal;
-        const token=localStorage.getItem('jwtToken');
-
-		const getMyAllBoards = async ()=>{
-			if(token==null) return;
-
-            const url=process.env.REACT_APP_BASE_URL+'/board/myBoard';
-            
-            try{
-                let res=await axios.get(url,{
+        const signal = controller.signal;
+        const token = localStorage.getItem('jwtToken');
+    
+        const getData = async () => {
+            if (!token) return;
+    
+            let url = process.env.REACT_APP_BASE_URL + '/board/myBoard';
+    
+            try {
+                setIsPending(true);
+                const response = await axios.get(url, {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}` // Include the authorization token in the headers
+                        'Authorization': `Bearer ${token}`
                     },
                     signal
                 });
-                res=res.data;
-                if(res.statusCode && (""+res.statusCode).startsWith("2")){
-                    
-                    setMyAllBoards(res.data);
-                    if(res.data.length > 0){
-                        setCurrBoard(res.data[0]);
-                        getAllTasks(res.data[0].boardId);
+                
+                if (response.data.statusCode && ("" + response.data.statusCode).startsWith("2")) {
+                    setMyAllBoards(response.data.data);
+                    if (response.data.data.length > 0) {
+                        setCurrBoard(response.data.data[0]);
+                        getAllTasks(response.data.data[0].boardId);
                     }
                 }
+            } catch (error) {
+                if (!controller.signal.aborted) {
+                    console.log('Error fetching my boards:', error);
+                }
             }
-            catch(error){
-                console.log('error 💥:',error);
-            }
-        }
-        const getAllUsers = ()=>{
-			if(token==null) return;
 
-            const url=process.env.REACT_APP_BASE_URL+'/user';
-            try{
-                fetch(url, {
+            url = process.env.REACT_APP_BASE_URL + '/user';
+    
+            try {
+                const response = await fetch(url, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`, // Include the JWT token in the Authorization header
+                        'Authorization': `Bearer ${token}`
                     },
                     signal
-                })
-                .then(res => res.json())
-                .then(res=>{
-                    
-                    if(res.statusCode && (""+res.statusCode).startsWith("2")){
-                        setAllusers(prev => res.data);
-                    }
                 });
-            }catch(error){
-                console.log('error 💥:',error);
+    
+                const data = await response.json();
+                if (data.statusCode && ("" + data.statusCode).startsWith("2")) {
+                    setAllusers(data.data);
+                }
+            } catch (error) {
+                if (!controller.signal.aborted) {
+                    console.log('Error fetching all users:', error);
+                }
+            } finally {
+                setIsPending(false);
             }
-        }
-
-        getMyAllBoards();
-        getAllUsers();
-    },[newBoardAdded]);
+        
+        };
+    
+        getData();
+        
+    
+        return () => {
+            controller.abort(); // Cleanup function to abort fetch requests on component unmount
+        };
+    }, [newBoardAdded]);
+    
 
     const noBoardFound=(
         <Grid xs={9.76}>   
             <NoBoardFound/>
         </Grid>
     )
+    
+    
 
     return (
         
         <Grid style={{ height: '100vh' ,width:'100vw'}} container spacing={0}>
             
-
             <Grid xs={2.24} >
                 <SideBar cnts={getTaskCnt()} allBoards={myAllBoards} setCurrBoardFromChild={setCurrBoardFromChild}/>
             </Grid>
-            {currBoard==null ? 
-            
-            noBoardFound
+            {isPending ? 
+                <Loading/>
                 :
-            <Grid xs={9.76} sx={{overflow:'scroll'}}>   
-                <MainDashBoard 
-                    allTask={allTask} 
-                    allUsers={allUsers} 
-                    currBoard={currBoard}
-                    setNewBoardAdded={setNewBoardAdded}
-                />
-            </Grid>}
+                (currBoard==null ? 
+                
+                noBoardFound
+                    :
+                <Grid xs={9.76} sx={{overflow:'scroll'}}>   
+                    <MainDashBoard 
+                        allTask={allTask} 
+                        allUsers={allUsers} 
+                        currBoard={currBoard}
+                        setNewBoardAdded={setNewBoardAdded}
+                    />
+                </Grid>)
+            }           
         </Grid>
     )
 }
