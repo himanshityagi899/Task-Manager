@@ -10,6 +10,7 @@ const AddBoardForm = ({setNewBoardAdded,setAddBoardMode}) => {
 		title:"",
 		description:""
 	});
+	const [isPending,setIsPending] = useState(false);
 
 	const handleSubmit =(event)=>{
 		
@@ -18,6 +19,7 @@ const AddBoardForm = ({setNewBoardAdded,setAddBoardMode}) => {
 		const signal = controller.signal;
         
         try{
+			setIsPending(true);
             const token=localStorage.getItem('jwtToken');
             const url=process.env.REACT_APP_BASE_URL+'/board';
             if(!token) return;
@@ -41,11 +43,12 @@ const AddBoardForm = ({setNewBoardAdded,setAddBoardMode}) => {
                 else{
 					toast.error(res.message || "Something went wrong while adding board!")
                 }
-                
+                setIsPending(false);
             });
         }
         catch(error){
             toast.error(error.message || "something went wrong!");
+			setIsPending(false);
         };
 
     };
@@ -85,8 +88,8 @@ const AddBoardForm = ({setNewBoardAdded,setAddBoardMode}) => {
 				sx={{ width: '300px',marginBottom:'20px'}}
 			/>
 
-			<button className='submit-btn' onClick={handleSubmit}>Add</button>
-			<span  onClick={() => setAddBoardMode(prev => !prev)} style={{backgroundColor: "#103569",color:"white"}} className='cursor-pointer px-1  rounded-sm b absolute top-0 right-10'>X</span>
+			<button className='submit-btn' onClick={handleSubmit}>{isPending ? 'Loading..':'Add'}</button>
+			<span  onClick={() => setAddBoardMode(prev => !prev)} style={{backgroundColor: "rgb(18,24,38)",color:"white"}} className='cursor-pointer px-1  rounded-sm b absolute top-0 right-10'>X</span>
 		</form>
   )
 }

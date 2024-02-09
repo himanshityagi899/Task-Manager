@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 const Lane = ({task}) => {
     const [currTask,setCurrTask] = useState(task);
-    
+
     return (
         <div className='flex justify-around'>
             <Card task={currTask} setCurrTask={setCurrTask} visible={currTask.status==="INPROGRESS"}/>

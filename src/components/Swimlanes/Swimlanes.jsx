@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import LaneWrapper from './LaneWrapper/LaneWrapper';
+import { UserContext } from '../../contexts/UserContextProvider';
 
 const Swimlanes = ({allTask,allUsers}) => {
-
+    const {user} = useContext(UserContext);
+    
     const groupTasksByUserId=()=> {
         const userMap=allUsers.reduce((map, user) => {
             map[user.userId] = user.name+"("+user.email+")";
@@ -30,7 +32,7 @@ const Swimlanes = ({allTask,allUsers}) => {
     }
     
     let keyValArray=[];
-
+ 
     const preProcess=()=>{
         const groupedTask=groupTasksByUserId();
         for(const key in groupedTask){

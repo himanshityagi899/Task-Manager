@@ -15,7 +15,7 @@ const LaneWrapper = ({userTag,allTaskForUser}) => {
     const userName=userTag.split('(')[0];
     let userEmail=(userTag.split('(')[1]);
     userEmail=userEmail.substring(0, userEmail. length - 1);
-
+    
     const copyMail=(event)=>{
         event.stopPropagation();
         navigator.clipboard.writeText(userEmail)
@@ -30,7 +30,9 @@ const LaneWrapper = ({userTag,allTaskForUser}) => {
     }
 
     let k=100;
+   
     const lanes=allTaskForUser.map(task => {
+        
         return <Lane key={k++} task={task}/>
     });
 
