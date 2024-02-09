@@ -81,7 +81,7 @@ const AddBoardForm = ({setNewBoardAdded,setAddBoardMode}) => {
 				
 				name='description' 
 				label="Description" 
-				value={board.password} 
+				value={board.description} 
 				variant="standard" 
 				onChange={handleChange}
 				

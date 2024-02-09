@@ -14,7 +14,7 @@ const Signup = ({handleCross}) => {
 		email:"",
 		password:"",
         confirmPassword:"",
-        designation:""
+        designation:"INTERN"
 	});
 	const [isPending,setIsPending] = useState(false);
 	const [isEmailValid,setIsEmailValid] = useState(true);
@@ -137,20 +137,7 @@ const Signup = ({handleCross}) => {
 				sx={{ width: '300px',marginBottom:'20px'}}
 				
 			/>
-			<FormControl style={{ width: '300px' }}>
-				<InputLabel id="demo-simple-select-label">Designation</InputLabel>
-					<Select
-						name='designation'
-						value={user.designation}
-						label="Designation"
-						onChange={handleChange}
-					>
-						<MenuItem value={"MANAGER"}>MANAGER</MenuItem>
-						<MenuItem value={"SENIOR_ENGINEER"}>SENIOR_ENGINEER</MenuItem>
-						<MenuItem value={"ENGINEER"}>ENGINEER</MenuItem>
-						<MenuItem value={"INTERN"}>INTERN</MenuItem>
-					</Select>
-     		 </FormControl>
+			
 
             <button className='submit-btn' onClick={handleSubmit}>
 				{isPending ? "Loading...":"Sigup"}
