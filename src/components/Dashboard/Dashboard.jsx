@@ -62,12 +62,14 @@ const Dashboard = () => {
             
                 if(res.statusCode && (""+res.statusCode).startsWith("2")){
                     setAllTask(prev => res.data);
-                    setShowSpinner(false);
+                    
                 }
+                setShowSpinner(false);
                 setIsPending(false);
             });
         }catch(error){
             console.log('error 💥:',error);
+            setShowSpinner(false);
             setIsPending(false);
         }
     }
