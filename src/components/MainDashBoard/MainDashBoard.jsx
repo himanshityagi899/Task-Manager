@@ -4,14 +4,21 @@ import Swimlanes from '../Swimlanes/Swimlanes';
 import { UserContext } from '../../contexts/UserContextProvider';
 import AddBoardForm from '../Dashboard/AddBoardForm/AddBoardForm';
 import AddPeopleForm from '../Dashboard/AddPeopleForm/AddPeopleForm';
-
+import AddTaskForm from '../Dashboard/AddTaskMode/AddTaskMode';
 
 const MainDashBoard = ({allTask,currBoard,allUsers,setNewBoardAdded}) => {
   const {user} = useContext(UserContext);
 
   const [addBoardMode,setAddBoardMode]= useState(false);
   const [addPeopleMode,setAddPeopleMode] = useState(false);
-  const blur=(addBoardMode || addPeopleMode);
+  const [addTaskMode,setAddTaskMode] = useState(false);
+  let allTaskForThisUser=allTask;
+
+  const addTask=(task)=>{
+    allTaskForThisUser.push(task);
+  }
+
+  const blur=(addBoardMode || addPeopleMode || addTaskMode);
 
   return (
     
@@ -26,23 +33,25 @@ const MainDashBoard = ({allTask,currBoard,allUsers,setNewBoardAdded}) => {
               <h4 className='text-xl'>{currBoard?.description }</h4>
             </div>
             <div className='flex'>
+              <div onClick={() => setAddTaskMode(prev => !prev)} className={` addBoard ${blur ? 'blurred':''}`}>
+                Add Task
+              </div>
               {/* if manager show Add Board button */}
               {user.role==="MANAGER" && 
-                    <div onClick={() => setAddBoardMode(prev => !prev)} className={` addBoard ${addPeopleMode || addBoardMode ? 'blurred':''}`}>
+                    <div onClick={() => setAddBoardMode(prev => !prev)} className={` addBoard ${blur ? 'blurred':''}`}>
                         Add Board
                     </div>
-                }
+              }
                 {/* if manager show Add People to Board button */}
-                {user.role==="MANAGER" && 
-                    <div onClick={() => setAddPeopleMode(prev => !prev)} className={` addBoard ${(addPeopleMode || addBoardMode) ? 'blurred':''}`}>
-                        Add People
-                    </div>
-                }
-                
+              {user.role==="MANAGER" && 
+                  <div onClick={() => setAddPeopleMode(prev => !prev)} className={` addBoard ${(blur) ? 'blurred':''}`}>
+                      Add People
+                  </div>
+              }
             </div>
           </div>
 
-          <Swimlanes allTask={allTask} allUsers={allUsers}/>
+          <Swimlanes allTask={allTaskForThisUser} allUsers={allUsers}/>
                   
         </div>
         {/* toggle addBoardMode */}
@@ -59,6 +68,13 @@ const MainDashBoard = ({allTask,currBoard,allUsers,setNewBoardAdded}) => {
             <div className='middleFormWrapper'>
                 <AddPeopleForm allUsers={allUsers} setAddPeopleMode={setAddPeopleMode} boardId={currBoard.boardId}/>
             </div>
+        }
+
+        {
+          addTaskMode && 
+          <div className='middleFormWrapper'>
+                <AddTaskForm addTask={addTask} setAddTaskMode={setAddTaskMode} boardId={currBoard.boardId}/>
+          </div>
         }
     
     </div>

@@ -25,7 +25,7 @@ const Dashboard = () => {
     
     /* states used to reflect events */
     const [newBoardAdded,setNewBoardAdded] = useState(true);
-    
+    const [showSpinner,setShowSpinner] = useState(true);
     const [isPending,setIsPending] = useState(false);
 
     const setCurrBoardFromChild=(boardId)=>{
@@ -62,6 +62,7 @@ const Dashboard = () => {
             
                 if(res.statusCode && (""+res.statusCode).startsWith("2")){
                     setAllTask(prev => res.data);
+                    setShowSpinner(false);
                 }
                 setIsPending(false);
             });
@@ -161,12 +162,15 @@ const Dashboard = () => {
                 noBoardFound
                     :
                 <Grid xs={9.76} sx={{overflow:'scroll'}}>   
-                    <MainDashBoard 
-                        allTask={allTask} 
-                        allUsers={allUsers} 
-                        currBoard={currBoard}
-                        setNewBoardAdded={setNewBoardAdded}
-                    />
+                    {(showSpinner && allTask.length==0  ) ? <div><Loading/></div>:
+                        <MainDashBoard 
+                            allTask={allTask} 
+                            allUsers={allUsers} 
+                            currBoard={currBoard}
+                            setNewBoardAdded={setNewBoardAdded}
+                        />
+                    }
+                    
                 </Grid>)
             }           
         </Grid>

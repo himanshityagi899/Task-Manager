@@ -13,8 +13,8 @@ const LaneWrapper = ({userTag,allTaskForUser}) => {
     const [showMail,setShowMail] = useState(false);
 
     const userName=userTag.split('(')[0];
-    let userEmail=(userTag.split('(')[1]);
-    userEmail=userEmail.substring(0, userEmail. length - 1);
+    let userEmail=(userTag.split('(')[1]).slice(0,-1);
+   
     
     const copyMail=(event)=>{
         event.stopPropagation();
@@ -28,15 +28,6 @@ const LaneWrapper = ({userTag,allTaskForUser}) => {
                
             });
     }
-
-    let k=100;
-   
-    const lanes=allTaskForUser.map(task => {
-        
-        return <Lane key={k++} task={task}/>
-    });
-
-    
 
     return (
         <div id="laneWrapper" className='mb-[30px] pl-10'>
@@ -77,7 +68,12 @@ const LaneWrapper = ({userTag,allTaskForUser}) => {
                         <span>Blocker</span>
                         <span>Completed</span>
                     </div>
-                    {lanes}
+                    {
+                        allTaskForUser.map((task,index) => {
+        
+                            return <Lane key={index} task={task}/>
+                        })
+                    }
                 </AccordionDetails>
             </Accordion>    
             
