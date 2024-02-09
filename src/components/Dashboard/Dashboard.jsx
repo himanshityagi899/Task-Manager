@@ -164,15 +164,12 @@ const Dashboard = () => {
                 noBoardFound
                     :
                 <Grid xs={9.76} sx={{overflow:'scroll'}}>   
-                    {(showSpinner && allTask.length==0  ) ? <div><Loading/></div>:
                         <MainDashBoard 
                             allTask={allTask} 
                             allUsers={allUsers} 
                             currBoard={currBoard}
                             setNewBoardAdded={setNewBoardAdded}
                         />
-                    }
-                    
                 </Grid>)
             }           
         </Grid>
