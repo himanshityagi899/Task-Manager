@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaSpinner } from 'react-icons/fa';
 
-const DropDownMenu = ({task,status,setCurrTask}) => {
+const DropDownMenu = ({task,status,setCurrTaskUtil}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isPending,setIsPending] = useState(false);
   
@@ -41,13 +41,7 @@ const DropDownMenu = ({task,status,setCurrTask}) => {
         res=res.data;
         if(res.statusCode && (""+res.statusCode).startsWith("2")){
             toast.success("Task Status Updated!")
-            setCurrTask(prev => {
-                return{
-                    ...prev,
-                    ['status']:newStatus
-                }
-            });
-            
+            setCurrTaskUtil(newStatus);
         }
         setIsPending(false);
         
