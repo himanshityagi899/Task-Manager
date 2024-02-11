@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import TextField from '@mui/material/TextField';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import './Signup.css';
 import { toast } from 'react-hot-toast';
-import Loading from '../Loading/Loading';
+
 
 const Signup = ({handleCross}) => {
 	const [user,setUser] = useState({

@@ -5,7 +5,9 @@ import { green } from '@mui/material/colors';
 import { UserContext } from '../../contexts/UserContextProvider';
 
 function SideBar({allBoards,setCurrBoardFromChild,cnts}) {
-    const {user} = React.useContext(UserContext);
+    const {user} =React.useContext(UserContext);
+
+
     const handleChangeBoard=(boardId)=>{
         setCurrBoardFromChild(boardId);
     }

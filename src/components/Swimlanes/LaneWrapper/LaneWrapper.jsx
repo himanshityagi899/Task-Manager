@@ -13,7 +13,7 @@ const LaneWrapper = ({userTag,allTaskForUser}) => {
     const [showMail,setShowMail] = useState(false);
 
     const userName=userTag.split('(')[0];
-    let userEmail=(userTag.split('(')[1]).slice(0,-1);
+    let userEmail=(userTag.split('(')[1])?.slice(0,-1);
    
     
     const copyMail=(event)=>{
@@ -62,7 +62,7 @@ const LaneWrapper = ({userTag,allTaskForUser}) => {
                     </div>
                     {
                         allTaskForUser.map((task,index) => {
-        
+                            
                             return <Lane key={index} task={task}/>
                         })
                     }

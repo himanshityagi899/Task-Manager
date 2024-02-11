@@ -1,14 +1,21 @@
 import Card from '../Card/Card';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Lane = ({task}) => {
-    const [currTask,setCurrTask] = useState(task);
+    const curr=task;
+    const [currTask,setCurrTask] = useState(curr);
+    
+
+
+    useEffect(()=>{
+        
+    },[]);
 
     return (
         <div className='flex justify-around'>
-            <Card task={currTask} setCurrTask={setCurrTask} visible={currTask.status==="INPROGRESS"}/>
-            <Card task={currTask} setCurrTask={setCurrTask} visible={currTask.status==="BLOCKER"}/>
-            <Card task={currTask} setCurrTask={setCurrTask} visible={currTask.status==="COMPLETE"}/>
+            <Card status={currTask.status} task={task} setCurrTask={setCurrTask}  visible={currTask.status==="INPROGRESS"}/>
+            <Card status={currTask.status} task={task} setCurrTask={setCurrTask}  visible={currTask.status==="BLOCKER"}/>
+            <Card status={currTask.status} task={task} setCurrTask={setCurrTask}  visible={currTask.status==="COMPLETE"}/>
         </div>
     )
 }

@@ -1,12 +1,9 @@
 import axios from 'axios';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaSpinner } from 'react-icons/fa';
 
-import { UserContext } from '../../../contexts/UserContextProvider';
-
 const DropDownMenu = ({task,status,setCurrTask}) => {
-  const {user}=useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
   const [isPending,setIsPending] = useState(false);
   
@@ -50,13 +47,14 @@ const DropDownMenu = ({task,status,setCurrTask}) => {
                     ['status']:newStatus
                 }
             });
+            
         }
         setIsPending(false);
         
     }
     catch(error){
-      
-      toast.error(error.response.data.message);
+      // console.log(error);
+      toast.error(error.response.data.message || 'Something went wrong');
       setIsPending(false);
       
     }

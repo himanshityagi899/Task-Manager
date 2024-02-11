@@ -1,12 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, {useEffect, useState } from 'react'
 import axios from 'axios';
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
-import { UserContext } from '../../contexts/UserContextProvider';
 import SideBar from '../SideBar/SideBar';
 import MainDashBoard from '../MainDashBoard/MainDashBoard';
-import AddBoardForm from './AddBoardForm/AddBoardForm';
 import './Dashboard.css';
-import AddPeopleForm from './AddPeopleForm/AddPeopleForm';
 import NoBoardFound from '../NoBoardFound/NoBoardFound';
 import Loading from '../Loading/Loading';
 
@@ -25,7 +22,6 @@ const Dashboard = () => {
     
     /* states used to reflect events */
     const [newBoardAdded,setNewBoardAdded] = useState(true);
-    const [showSpinner,setShowSpinner] = useState(true);
     const [isPending,setIsPending] = useState(false);
 
     const setCurrBoardFromChild=(boardId)=>{
@@ -64,12 +60,12 @@ const Dashboard = () => {
                     setAllTask(prev => res.data);
                     
                 }
-                setShowSpinner(false);
+                
                 setIsPending(false);
             });
         }catch(error){
             console.log('error 💥:',error);
-            setShowSpinner(false);
+            
             setIsPending(false);
         }
     }
