@@ -22,15 +22,15 @@ const MainDashBoard = ({allTask,currBoard,allUsers,setNewBoardAdded}) => {
 
   return (
     
-      <div className={`MainDashBoardWrapper`}>
+      <div className='MainDashBoardWrapper min-w-[700px]'>
       
         <div className={`${blur ? "blurred":""}`}>
 
         
           <div className='flex justify-between titleWrapper '>
             <div className='flex flex-col items-start'>
-              <h1 className='font-bold text-3xl'>{currBoard?.title}</h1>
-              <h4 className='text-xl'>{currBoard?.description }</h4>
+              <h1 className='font-bold text-3xl text-start'>{currBoard?.title}</h1>
+              <h4 className='text-xl text-start'>{currBoard?.description }</h4>
             </div>
             <div className='flex'>
               <div onClick={() => setAddTaskMode(prev => !prev)} className={` addBoard ${blur ? 'blurred':''}`}>

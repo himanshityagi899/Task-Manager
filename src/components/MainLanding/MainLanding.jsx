@@ -18,7 +18,8 @@ export const Main = () => {
     <>
     <div className='main-wrapper'>
       <div className='main-inner-wrapper'>
-        <img className='main-img' src={`${process.env.PUBLIC_URL}/assets/images/landing-img.png`} alt="" />
+        {/* <img className='main-img' src={`${process.env.PUBLIC_URL}/assets/images/landing-img.png`} alt="" /> */}
+        <img className='main-img' src={`${process.env.PUBLIC_URL}/assets/images/newLogo.png`} alt="" />
         <h2 className='heading'>Effortlessly Prioritize, Collaborate, and Achieve with Task Bucket!</h2>
       </div>
       

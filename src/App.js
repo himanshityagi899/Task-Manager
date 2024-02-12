@@ -1,4 +1,4 @@
-import { useContext,useEffect, useState } from 'react';
+import { useContext } from 'react';
 import './App.css';
 import LandingPage from './components/LandingPage/LandingPage';
 
@@ -8,8 +8,6 @@ import { Toaster } from 'react-hot-toast';
 import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
-
-  const {isLogedIn}=useContext(UserContext);
 
   return (
     <>
