@@ -1,7 +1,7 @@
 import Card from '../Card/Card';
 import React, { useEffect, useState } from 'react'
 
-const Lane = ({task}) => {
+const Lane = ({task,currBoard}) => {
     const curr=task;
     const [currTask,setCurrTask] = useState(task);
     
@@ -17,11 +17,11 @@ const Lane = ({task}) => {
     
     return (
         <>
-            {currTask && 
+            {(currTask && currBoard) && 
                 <div className='flex justify-around'>
-                    <Card status={currTask.status} task={task} setCurrTaskUtil={setCurrTaskUtil}  visible={currTask.status==="INPROGRESS"}/>
-                    <Card status={currTask.status} task={task} setCurrTaskUtil={setCurrTaskUtil}  visible={currTask.status==="BLOCKER"}/>
-                    <Card status={currTask.status} task={task} setCurrTaskUtil={setCurrTaskUtil}  visible={currTask.status==="COMPLETE"}/>
+                    <Card status={currTask.status} task={task} setCurrTaskUtil={setCurrTaskUtil}  visible={currTask.status==="INPROGRESS"} boardId={currBoard.boardId}/>
+                    <Card status={currTask.status} task={task} setCurrTaskUtil={setCurrTaskUtil}  visible={currTask.status==="BLOCKER"} boardId={currBoard.boardId}/>
+                    <Card status={currTask.status} task={task} setCurrTaskUtil={setCurrTaskUtil}  visible={currTask.status==="COMPLETE"} boardId={currBoard.boardId}/>
                 </div>
             }
         </>

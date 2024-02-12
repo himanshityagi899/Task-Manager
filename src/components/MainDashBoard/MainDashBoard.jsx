@@ -51,7 +51,7 @@ const MainDashBoard = ({allTask,currBoard,allUsers,setNewBoardAdded}) => {
             </div>
           </div>
 
-          <Swimlanes allTask={allTaskForThisUser} allUsers={allUsers}/>
+          <Swimlanes allTask={allTaskForThisUser} allUsers={allUsers} currBoard={currBoard}/>
                   
         </div>
         {/* toggle addBoardMode */}

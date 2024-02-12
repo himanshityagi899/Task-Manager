@@ -7,7 +7,7 @@ import Lane from '../Lane/Lane';
 import toast from 'react-hot-toast';
 import { UserContext } from '../../../contexts/UserContextProvider';
 
-const LaneWrapper = ({userTag,allTaskForUser}) => {
+const LaneWrapper = ({userTag,allTaskForUser,currBoard}) => {
     const {user} = useContext(UserContext);
 
     const [showMail,setShowMail] = useState(false);
@@ -63,7 +63,7 @@ const LaneWrapper = ({userTag,allTaskForUser}) => {
                     {
                         allTaskForUser.map((task,index) => {
                             
-                            return <Lane key={index} task={task}/>
+                            return <Lane key={index} task={task} currBoard={currBoard}/>
                         })
                     }
                 </AccordionDetails>
