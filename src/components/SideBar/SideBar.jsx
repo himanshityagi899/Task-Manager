@@ -4,7 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import { green } from '@mui/material/colors';
 import { UserContext } from '../../contexts/UserContextProvider';
 
-function SideBar({allBoards,setCurrBoardFromChild,cnts}) {
+const SideBar=({allBoards,setCurrBoardFromChild,cnts})=> {
     const {user} =React.useContext(UserContext);
 
 
@@ -20,7 +20,7 @@ function SideBar({allBoards,setCurrBoardFromChild,cnts}) {
 
     const allBoardsLinks=allBoards.map(board => {
         return (
-            <a key={board.boardId} onClick={() => handleChangeBoard(board?.boardId)} id='hover' className=" cursor-pointer flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 text-start">
+            <a key={board.boardId} onClick={() => handleChangeBoard(board.boardId)} id='hover' className=" cursor-pointer flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700 text-start">
                 <span className="mx-2 text-sm font-medium">{board?.title}</span>
             </a>
         )

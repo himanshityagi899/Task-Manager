@@ -23,6 +23,7 @@ const Dashboard = () => {
     /* states used to reflect events */
     const [newBoardAdded,setNewBoardAdded] = useState(true);
     const [isPending,setIsPending] = useState(false);
+    
 
     const setCurrBoardFromChild=(boardId)=>{
         const board=myAllBoards.filter(board => board.boardId==boardId);
@@ -57,7 +58,7 @@ const Dashboard = () => {
             .then(res=>{
             
                 if(res.statusCode && (""+res.statusCode).startsWith("2")){
-                    setAllTask(prev => res.data);
+                    setAllTask(res.data);
                     
                 }
                 
