@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 const Lane = ({task}) => {
     const curr=task;
-    const [currTask,setCurrTask] = useState(curr);
+    const [currTask,setCurrTask] = useState(task);
     
     const setCurrTaskUtil=(newStatus)=>{
         setCurrTask(prev => {
@@ -14,16 +14,17 @@ const Lane = ({task}) => {
         })
     }
 
-    useEffect(()=>{
-        
-    },[]);
-
+    
     return (
-        <div className='flex justify-around'>
-            <Card status={currTask.status} task={task} setCurrTaskUtil={setCurrTaskUtil}  visible={currTask.status==="INPROGRESS"}/>
-            <Card status={currTask.status} task={task} setCurrTaskUtil={setCurrTaskUtil}  visible={currTask.status==="BLOCKER"}/>
-            <Card status={currTask.status} task={task} setCurrTaskUtil={setCurrTaskUtil}  visible={currTask.status==="COMPLETE"}/>
-        </div>
+        <>
+            {currTask && 
+                <div className='flex justify-around'>
+                    <Card status={currTask.status} task={task} setCurrTaskUtil={setCurrTaskUtil}  visible={currTask.status==="INPROGRESS"}/>
+                    <Card status={currTask.status} task={task} setCurrTaskUtil={setCurrTaskUtil}  visible={currTask.status==="BLOCKER"}/>
+                    <Card status={currTask.status} task={task} setCurrTaskUtil={setCurrTaskUtil}  visible={currTask.status==="COMPLETE"}/>
+                </div>
+            }
+        </>
     )
 }
 

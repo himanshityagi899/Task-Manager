@@ -16,7 +16,7 @@ const Swimlanes = ({allTask,allUsers}) => {
         }
 
         const groupedTask=allTask.reduce((groups, task) => {
-            const userId = userMap[task.userId];
+            const userId = userMap[task?.userId];
             if (!groups[userId]) {
             groups[userId] = []; 
             }
