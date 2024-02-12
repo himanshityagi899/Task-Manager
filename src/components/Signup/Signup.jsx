@@ -35,13 +35,13 @@ const Signup = ({handleCross}) => {
 			.then(res => res.json())
 			.then(res=>{
 				
-				if(!res.statusCode || !(res.statusCode!=="201")){
-					toast.error(res.message || "something went wrong!");
-				}
-				else{
+				if(res.statusCode && (""+res.statusCode).startsWith("2")){
 					toast.success("Signed in! Please login");
 					setIsPending(false);
-					goToLogin();
+					goToLogin();	
+				}
+				else{
+					toast.error(res.message || "something went wrong!");
 				}
 				setIsPending(false); 
 			});
