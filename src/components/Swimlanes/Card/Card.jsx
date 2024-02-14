@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import DropDownMenu from './DropDownMenu';
 import './Card.css'
 import { Comment } from './Comment';
+import AssignTaskForm from './AssignTaskForm';
 
-const Card = ({task,visible,setCurrTaskUtil,status,setStatus}) => {
+const Card = ({task,visible,setCurrTaskUtil,status,setStatus,boardId}) => {
   const left=(status === 'COMPLETE');
   const [showComment,setShowComment] = useState(false);
+  const [showAssignForm,setShowAssignForm] = useState(false);
 
   const commentSection= <Comment taskId={task.taskId}/>
 
@@ -30,8 +32,17 @@ const Card = ({task,visible,setCurrTaskUtil,status,setStatus}) => {
               {commentSection}
             </div>
           }
+          <button onClick={()=> setShowAssignForm(prev => !prev)} className='absolute text-sm font-semibold mt-1'>Assign To</button>
+          {
+            visible && boardId && task 
+            && showAssignForm &&
+            <div className='w-[20px]'>
+              <AssignTaskForm boardId={boardId} taskId={task.taskId} setShowAssignForm={setShowAssignForm}/>
+            </div>
+          }
           
       </div>
+      
       
       
     </>

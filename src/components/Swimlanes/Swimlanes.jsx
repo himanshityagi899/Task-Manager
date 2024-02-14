@@ -2,7 +2,7 @@
 import LaneWrapper from './LaneWrapper/LaneWrapper';
 
 
-const Swimlanes = ({allTask,allUsers}) => {
+const Swimlanes = ({allTask,allUsers,currBoard}) => {
     
     const groupTasksByUserId=()=> {
         const userMap=allUsers.reduce((map, user) => {
@@ -44,7 +44,7 @@ const Swimlanes = ({allTask,allUsers}) => {
     
     let k=0;
     const render=keyValArray.map(a=>{
-        return <LaneWrapper key={k++} userTag={a[0]} allTaskForUser={a[1]} />
+        return <LaneWrapper key={k++} userTag={a[0]} allTaskForUser={a[1]} currBoard={currBoard}/>
     })
 
     
