@@ -7,6 +7,7 @@ export const UserContext = createContext({user:null,isLogedIn:false,err:null});
 
 
 export const UserContextProvider = ({children})=>{
+	
 
     const [user,setUser] = useState(null);
 	const [isLogedIn,setIsLogedIn] = useState(false);
@@ -26,10 +27,11 @@ export const UserContextProvider = ({children})=>{
 		const getUser= ()=>{
 
 			const token=localStorage.getItem('jwtToken');
+			const url=process.env.REACT_APP_BASE_URL+'/user/getMe';
 	
 			if(token==null) return;
 			
-			fetch('http://localhost:8081/api/v1/user/getMe', {
+			fetch(url, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
