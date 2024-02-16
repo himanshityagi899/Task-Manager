@@ -158,7 +158,7 @@ const Signup = ({handleCross}) => {
 			
 
             <button className='submit-btn' onClick={handleSubmit}>
-				{isPending ? "Loading...":"Sigup"}
+				{isPending ? "Loading...":"SignUp"}
 			</button>
 			
 			<span>Already have a account?</span>
